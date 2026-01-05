@@ -8,7 +8,22 @@ export interface Song {
   youtube?: string;
   lyrics?: string;
   bpm?: number;
-  key?: string;
+  key?: string; // Tom Escolhido
+  originalKey?: string; // Tom Original (geral)
+  videoKey?: string; // Tom do Vídeo específico
+  isOffering?: boolean; // Indicação se é música de oferta
+  isCommunion?: boolean; // Indicação se é música de ceia
+  archived?: boolean; // Indicação se a música está arquivada
+}
+
+export interface LibrarySong extends Song {}
+
+export interface ChatMessage {
+  id: string;
+  senderName: string;
+  type: 'text' | 'audio';
+  content: string; // Texto ou Base64 do áudio
+  timestamp: number;
 }
 
 export interface TeamMember {
@@ -26,6 +41,9 @@ export interface WorshipEvent {
   time: string;
   team: TeamMember[];
   songs: Song[];
+  offeringSongs?: Song[];
+  communionSongs?: Song[];
+  chat?: ChatMessage[];
   notes?: string;
   createdAt: number;
 }
@@ -33,8 +51,12 @@ export interface WorshipEvent {
 export interface Member {
   id: string;
   name: string;
-  role: string;
-  whatsapp: string;
+  roles: string[]; 
+  whatsapp?: string;
   photoUrl?: string;
+  birthday?: string;
+  mentor?: string;
+  cellGroup?: string;
   availableDays?: string[];
+  archived?: boolean;
 }
